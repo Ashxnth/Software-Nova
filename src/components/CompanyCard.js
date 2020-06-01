@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { Card, Image, Text, Button } from '@zeit-ui/react';
+import { Card, Image, Text, Button, ButtonGroup } from '@zeit-ui/react';
 
 function CompanyCard({ name, location, image_url, careers_url }) {
     return (
@@ -10,7 +10,10 @@ function CompanyCard({ name, location, image_url, careers_url }) {
             <Text h4 style={{ marginBottom: '0' }}>{name}</Text>
             <Text type="secondary" small>{location}</Text>
             <Card.Footer>
+                <ButtonGroup type="success">
                 <a href={`${careers_url}`} target="_blank" rel="noopener noreferrer"><Button shadow type="success">Apply</Button></a>
+                <a href={`${careers_url}`} rel="noopener noreferrer"><Button shadow type="success">Edit</Button></a>
+                </ButtonGroup>
             </Card.Footer>
         </Card>
         </div>

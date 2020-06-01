@@ -1,5 +1,4 @@
 import React, {useState, useContext} from 'react';
-import { useHistory } from "react-router-dom";
 import '../App.css';
 import { Card, Input, Spacer, Button } from '@zeit-ui/react';
 import {CompanyContext} from '../context/CompanyContext';
@@ -27,13 +26,11 @@ function AddCompany() {
     setcareersUrl(e.target.value);
   }
 
-  let history = useHistory();
-
   const addCompany = (e) => {
     console.log('submitted');
     e.preventDefault();
     setCompany(prevCompany => [...prevCompany, {name: name, location: location, image_url: imageUrl, careers_url: careersUrl}]);
-    history.push('/');
+    document.querySelector('input').value = '';
   }
 
   return (
