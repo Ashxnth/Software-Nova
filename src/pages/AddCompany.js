@@ -9,7 +9,7 @@ function AddCompany() {
   const [location, setLocation] = useState('');
   const [imageUrl, setimageUrl] = useState('');
   const [careersUrl, setcareersUrl] = useState('');
-  const [company, setCompany] = useContext(CompanyContext);
+  const {company,setCompany} = useContext(CompanyContext);
 
   const updateName = (e) => {
     setName(e.target.value);
@@ -30,7 +30,6 @@ function AddCompany() {
   let history = useHistory();
 
   const addCompany = (e) => {
-    console.log('submitted');
     e.preventDefault();
     setCompany(prevCompany => [...prevCompany, {name: name, location: location, image_url: imageUrl, careers_url: careersUrl}]);
     history.push('/');

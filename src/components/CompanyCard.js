@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
-import { Card, Image, Text, Button, ButtonGroup } from '@zeit-ui/react';
+import { Card, Image, Text, Button } from '@zeit-ui/react';
+import {CompanyContext} from '../context/CompanyContext';
 
-function CompanyCard({ name, location, image_url, careers_url }) {
+function CompanyCard({ id, name, location, image_url, careers_url}) {
+    const {editUser,setEditUser} = useContext(CompanyContext);
+    function setEditedUser() {
+        setEditUser({
+            id: id,
+            name: name,
+            location: location,
+            image_url: image_url,
+            careers_url: careers_url
+        });
+    }
+
     return (
         <div className="CompanyCard">
         <Card width="250px">
@@ -10,10 +23,8 @@ function CompanyCard({ name, location, image_url, careers_url }) {
             <Text h4 style={{ marginBottom: '0' }}>{name}</Text>
             <Text type="secondary" small>{location}</Text>
             <Card.Footer>
-                <ButtonGroup type="success">
-                <a href={`${careers_url}`} target="_blank" rel="noopener noreferrer"><Button shadow type="success">Apply</Button></a>
-                <a href={`${careers_url}`} rel="noopener noreferrer"><Button shadow type="success">Edit</Button></a>
-                </ButtonGroup>
+                <a href={`${careers_url}`} target="_blank" rel="noopener noreferrer"><Button auto shadow type="success">Apply</Button></a>
+                <Link to='/edit-company'><Button onClick={setEditedUser} auto shadow type="secondary">Edit</Button></Link>
             </Card.Footer>
         </Card>
         </div>

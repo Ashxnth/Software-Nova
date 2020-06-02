@@ -1,14 +1,16 @@
 import React, {useState, useContext} from 'react';
+import { useHistory } from "react-router-dom";
 import '../App.css';
 import { Card, Input, Spacer, Button } from '@zeit-ui/react';
-import {CompanyContext} from '../context/CompanyContext';
+import { CompanyContext } from '../context/CompanyContext';
 
-function AddCompany() {
-  const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
-  const [imageUrl, setimageUrl] = useState('');
-  const [careersUrl, setcareersUrl] = useState('');
-  const [company, setCompany] = useContext(CompanyContext);
+function EditCompany() {
+  let {company, setCompany} = useContext(CompanyContext);
+  let {editUser, setEditUser} = useContext(CompanyContext);
+  let [name, setName] = useState(editUser.name);
+  let [location, setLocation] = useState(editUser.location);
+  let [imageUrl, setimageUrl] = useState(editUser.image_url);
+  let [careersUrl, setcareersUrl] = useState(editUser.careers_url);
 
   const updateName = (e) => {
     setName(e.target.value);
@@ -26,40 +28,43 @@ function AddCompany() {
     setcareersUrl(e.target.value);
   }
 
-  const addCompany = (e) => {
-    console.log('submitted');
+  let history = useHistory();
+
+  const editCompany = (e) => {
     e.preventDefault();
-    setCompany(prevCompany => [...prevCompany, {name: name, location: location, image_url: imageUrl, careers_url: careersUrl}]);
-    document.querySelector('input').value = '';
+    const updatedUser = { name: name, location: location, image_url: imageUrl, careers_url: careersUrl }
+    setCompany(company.map(company => company.id == editUser.id ? updatedUser : company));
+    history.push('/');
   }
 
   return (
-    <div className="AddCompany">
-      <div className="add-card">
+    <div className="EditCompany">
+      <div className="edit-card">
         <Card shadow>
-          <h2>Add Company</h2>
+          <h2>Edit Company</h2>
           <Spacer />
-          <Input onChange={updateName} placeholder="Google" width="95%">
+          <Input onChange={updateName} value={`${editUser.name}`} width="95%">
             Company Name
           </Input>
           <Spacer />
-          <Input onChange={updateLocation} placeholder="Mountain View, CA" width="95%">
+          <Input onChange={updateLocation} value={`${editUser.location}`} width="95%">
             Location
           </Input>
           <Spacer />
-          <Input onChange={updateimageUrl} placeholder="Link" width="95%">
+          <Input onChange={updateimageUrl} value={`${editUser.image_url}`} width="95%">
             Image URL
           </Input>
           <Spacer />
-          <Input onChange={updatecareersUrl} placeholder="Link" width="95%">
+          <Input onChange={updatecareersUrl}  value={`${editUser.careers_url}`} width="95%">
             Careers URL
           </Input>
           <Spacer />
-          <Button onClick={addCompany} shadow type="secondary">Submit</Button>
+          <Button onClick={editCompany} shadow auto type="secondary">Apply Changes</Button>
+          <Button shadow auto type="error">Delete</Button>
         </Card>
       </div>
     </div>
   );
 }
 
-export default AddCompany;
+export default EditCompany;

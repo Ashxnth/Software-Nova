@@ -36,6 +36,7 @@
   overflow-x: hidden;
   background-image: url('https://i.pinimg.com/originals/2c/51/a5/2c51a52e1a39bedf315c0f9fce8efb5e.png');
   background-size: cover;
+  min-height: 100vh;
 }
 
 .CompanyCard {
@@ -56,4 +57,11 @@ h1 {
 .add-card {
   max-width: 40em;
   margin: 0 auto;
+}
+
+/**Edit Company Styles**/
+.EditCompany {
+  min-height: 100vh;
+  background-image: url('https://i.pinimg.com/originals/2c/51/a5/2c51a52e1a39bedf315c0f9fce8efb5e.png');
+  background-size: cover;
 }
