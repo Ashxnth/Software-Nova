@@ -37,6 +37,12 @@ function EditCompany() {
     history.push('/');
   }
 
+  const deleteCompany = (e) => {
+    e.preventDefault();
+    setCompany(company.filter(company => company.id !== editUser.id));
+    history.push('/');
+  }
+
   return (
     <div className="EditCompany">
       <div className="edit-card">
@@ -60,7 +66,7 @@ function EditCompany() {
           </Input>
           <Spacer />
           <Button onClick={editCompany} shadow auto type="secondary">Apply Changes</Button>
-          <Button shadow auto type="error">Delete</Button>
+          <Button onClick={deleteCompany} shadow auto type="error">Delete</Button>
         </Card>
       </div>
     </div>
