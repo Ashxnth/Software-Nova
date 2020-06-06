@@ -1,0 +1,33 @@
+GET http://localhost:3000
+
+###
+
+POST http://localhost:3000 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "test",
+    "location": "test",
+    "image_url": "test",
+    "careers_url": "test"
+}
+
+###
+PUT http://localhost:3000/4 HTTP/1.1
+content-type: application/json
+
+{
+    "id": 4,
+    "name": "test11",
+    "location": "test11",
+    "image_url": "test11",
+    "careers_url": "test11"
+}
+
+###
+
+DELETE http://localhost:3000/4 HTTP/1.1
+content-type: application/json
+
+###
+
