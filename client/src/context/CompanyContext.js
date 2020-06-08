@@ -1,8 +1,10 @@
 import React, {useState, createContext} from 'react';
+import axios from 'axios';
 
 export const CompanyContext = createContext(); 
 
 export const CompanyProvider = (props) => {
+    //Initial State
     const [company, setCompany] = useState([
         {
             id: 1,
@@ -17,30 +19,11 @@ export const CompanyProvider = (props) => {
             location: 'Vancouver, BC',
             image_url: 'https://www.vmastoryboard.com/wp-content/uploads/2014/08/Amazon-Logo_Feature.jpg',
             careers_url: 'https://careers.google.com/jobs/'
-        },
-        {
-            id: 3,
-            name: 'Microsoft',
-            location: 'Seattle, Redmond',
-            image_url: 'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE2qVsJ?ver=3f74',
-            careers_url: 'https://careers.google.com/jobs/'
-        },
-        {
-            id: 4,
-            name: 'Facebook',
-            location: 'Menlo Park, CA',
-            image_url: 'https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2015/07/sdffdsafsdf-1200x604.png',
-            careers_url: 'https://careers.google.com/jobs/'
-        },
-        {
-            id: 5,
-            name: 'Netflix',
-            location: 'Vancouver, BC',
-            image_url: 'https://assets.brand.microsites.netflix.io/assets/fbd0c908-b388-11e7-9274-06c476b5c346_cm_800w.png?v=34',
-            careers_url: 'https://careers.google.com/jobs/'
         }
     ]);
+
     const [editUser, setEditUser] = useState({});
+
     return(
         <CompanyContext.Provider value={{company, setCompany, editUser, setEditUser}}>
             {props.children}

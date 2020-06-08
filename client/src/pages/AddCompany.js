@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import '../App.css';
 import { Card, Input, Spacer, Button } from '@zeit-ui/react';
 import {CompanyContext} from '../context/CompanyContext';
+import axios from 'axios';
 
 function AddCompany() {
   const [name, setName] = useState('');
@@ -31,7 +32,15 @@ function AddCompany() {
 
   const addCompany = (e) => {
     e.preventDefault();
-    setCompany(prevCompany => [...prevCompany, {name: name, location: location, image_url: imageUrl, careers_url: careersUrl}]);
+    axios.post('http://localhost:5000/api', {
+      name: name,
+      location: location,
+      image_url: imageUrl,
+      careers_url: careersUrl
+    })
+    .catch((error) => {
+    console.log(error);
+    });
     history.push('/');
   }
 

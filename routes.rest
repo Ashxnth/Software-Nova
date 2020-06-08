@@ -1,19 +1,19 @@
-GET http://localhost:3000
+GET http://localhost:5000/api
 
 ###
 
-POST http://localhost:3000 HTTP/1.1
+POST http://localhost:5000/api HTTP/1.1
 content-type: application/json
 
 {
-    "name": "test",
-    "location": "test",
-    "image_url": "test",
-    "careers_url": "test"
+    "name": "Netflix",
+    "location": "Los Gatos, CA",
+    "image_url": "https://assets.brand.microsites.netflix.io/assets/fbd0c908-b388-11e7-9274-06c476b5c346_cm_800w.png?v=34",
+    "careers_url": "https://careers.google.com/jobs/"
 }
 
 ###
-PUT http://localhost:3000/4 HTTP/1.1
+PUT http://localhost:5000/api/4 HTTP/1.1
 content-type: application/json
 
 {
@@ -26,7 +26,7 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:3000/4 HTTP/1.1
+DELETE http://localhost:5000/api/4 HTTP/1.1
 content-type: application/json
 
 ###

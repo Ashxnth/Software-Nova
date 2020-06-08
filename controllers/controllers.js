@@ -1,14 +1,13 @@
 const client = require('../db/database');
 
 //GET Companies
-exports.getCompany = () => {
-    client.query('SELECT * FROM "Companies";', (err, res) => {
+exports.getCompany = (req, res) => {
+    client.query('SELECT * FROM "Companies";', (err, result) => {
         if (err) {
           console.log(err.stack)
-        } else {
-          console.log(res.rows)
-          return res.rows;
         }
+        console.log(result.rows)
+        res.status(200).json(result.rows)
     });
 }
 

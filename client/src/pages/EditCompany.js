@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import '../App.css';
 import { Card, Input, Spacer, Button } from '@zeit-ui/react';
 import { CompanyContext } from '../context/CompanyContext';
+import axios from 'axios'
 
 function EditCompany() {
   let {company, setCompany} = useContext(CompanyContext);
@@ -32,14 +33,25 @@ function EditCompany() {
 
   const editCompany = (e) => {
     e.preventDefault();
-    const updatedUser = { name: name, location: location, image_url: imageUrl, careers_url: careersUrl }
-    setCompany(company.map(company => company.id == editUser.id ? updatedUser : company));
+    axios.put(`http://localhost:5000/api/${editUser.id}`, {
+      id: editUser.id,
+      name: name,
+      location: location,
+      image_url: imageUrl,
+      careers_url: careersUrl
+    })
+    .catch((error) => {
+    console.log(error);
+    });
     history.push('/');
   }
 
   const deleteCompany = (e) => {
     e.preventDefault();
-    setCompany(company.filter(company => company.id !== editUser.id));
+    axios.delete(`http://localhost:5000/api/${editUser.id}`)
+    .catch((error) => {
+    console.log(error);
+    });
     history.push('/');
   }
 
