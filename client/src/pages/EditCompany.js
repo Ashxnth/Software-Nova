@@ -6,8 +6,7 @@ import { CompanyContext } from '../context/CompanyContext';
 import axios from 'axios'
 
 function EditCompany() {
-  let {company, setCompany} = useContext(CompanyContext);
-  let {editUser, setEditUser} = useContext(CompanyContext);
+  let {editUser, token} = useContext(CompanyContext);
   let [name, setName] = useState(editUser.name);
   let [location, setLocation] = useState(editUser.location);
   let [imageUrl, setimageUrl] = useState(editUser.image_url);
@@ -39,20 +38,20 @@ function EditCompany() {
       location: location,
       image_url: imageUrl,
       careers_url: careersUrl
-    })
+    }, { headers: {authorization: `Bearer ${token}`} })
     .catch((error) => {
     console.log(error);
     });
-    history.push('/');
+    history.push('/home');
   }
 
   const deleteCompany = (e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:5000/api/${editUser.id}`)
+    axios.delete(`http://localhost:5000/api/${editUser.id}`, { headers: {authorization: `Bearer ${token}`} })
     .catch((error) => {
     console.log(error);
     });
-    history.push('/');
+    history.push('/home');
   }
 
   return (

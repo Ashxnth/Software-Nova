@@ -13,6 +13,7 @@ app.use(cors());
 
 app.use('/api', routes);
 
+//Use npx nodemon to start the server with nodemon
 app.listen(process.env.PORT|| 5000, () => {
     console.log(`Server has started on port ${process.env.PORT}`);
 });

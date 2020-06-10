@@ -1,8 +1,10 @@
 GET http://localhost:5000/api
+authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjIiLCJpYXQiOjE1OTE3NDUxNTEsImV4cCI6MTU5MTc0NTc1MX0.yGYc8jdhTvfV0GYPiCUoCPUoAglp-HdsCdPKTkNqQT4
 
 ###
 
 POST http://localhost:5000/api HTTP/1.1
+authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjIiLCJpYXQiOjE1OTE3NDUxNTEsImV4cCI6MTU5MTc0NTc1MX0.yGYc8jdhTvfV0GYPiCUoCPUoAglp-HdsCdPKTkNqQT4
 content-type: application/json
 
 {
@@ -31,3 +33,20 @@ content-type: application/json
 
 ###
 
+POST http://localhost:5000/api/signup HTTP/1.1
+content-type: application/json
+
+{
+    "username": "user2",
+    "password": "password2"
+}
+
+###
+
+POST http://localhost:5000/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "user2",
+    "password": "password2"
+}

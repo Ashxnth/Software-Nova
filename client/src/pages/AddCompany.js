@@ -1,8 +1,8 @@
 import React, {useState, useContext} from 'react';
 import { useHistory } from "react-router-dom";
+import {CompanyContext} from '../context/CompanyContext';
 import '../App.css';
 import { Card, Input, Spacer, Button } from '@zeit-ui/react';
-import {CompanyContext} from '../context/CompanyContext';
 import axios from 'axios';
 
 function AddCompany() {
@@ -10,7 +10,7 @@ function AddCompany() {
   const [location, setLocation] = useState('');
   const [imageUrl, setimageUrl] = useState('');
   const [careersUrl, setcareersUrl] = useState('');
-  const {company,setCompany} = useContext(CompanyContext);
+  const {token} = useContext(CompanyContext);
 
   const updateName = (e) => {
     setName(e.target.value);
@@ -32,16 +32,16 @@ function AddCompany() {
 
   const addCompany = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api', {
+    axios.post('http://localhost:5000/api/home', {
       name: name,
       location: location,
       image_url: imageUrl,
       careers_url: careersUrl
-    })
+    }, { headers: {authorization: `Bearer ${token}`} })
     .catch((error) => {
     console.log(error);
     });
-    history.push('/');
+    history.push('/home');
   }
 
   return (

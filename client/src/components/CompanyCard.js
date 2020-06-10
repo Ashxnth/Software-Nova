@@ -5,7 +5,7 @@ import { Card, Image, Text, Button } from '@zeit-ui/react';
 import {CompanyContext} from '../context/CompanyContext';
 
 function CompanyCard({ id, name, location, image_url, careers_url}) {
-    const {editUser,setEditUser} = useContext(CompanyContext);
+    const {setEditUser} = useContext(CompanyContext);
     function setEditedUser() {
         setEditUser({
             id: id,
