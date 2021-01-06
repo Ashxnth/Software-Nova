@@ -1,5 +1,15 @@
 # Software-Nova
-Software Nova is an internship tracker to help students to speed up the process of applying to companies.
+![Screenshot](https://raw.githubusercontent.com/Ashxnth/Software-Nova/master/assets/Software-Nova-Home.jpg)
 
-## Final Product
-![Demo](https://github.com/ashxnth/Software-Nova/blob/master/Software-Nova.png?raw=true)
+## Introduction
+Software Nova is a web platform to keep track of your job applications.
+
+## Technologies
+* React.js
+* Node.js
+* Express.js
+* MongoDB
+
+## Screenshots
+![Screenshot1](https://raw.githubusercontent.com/Ashxnth/Software-Nova/master/assets/Software-Nova-Login.jpg)
+![Screenshot2](https://raw.githubusercontent.com/Ashxnth/Software-Nova/master/assets/Software-Nova-Add.jpg)
