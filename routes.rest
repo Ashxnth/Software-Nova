@@ -37,8 +37,8 @@ POST http://localhost:5000/api/signup HTTP/1.1
 content-type: application/json
 
 {
-    "username": "user2",
-    "password": "password2"
+    "username": "user26",
+    "password": "password26"
 }
 
 ###
@@ -49,4 +49,14 @@ content-type: application/json
 {
     "username": "user2",
     "password": "password2"
+}
+
+###
+
+GET http://localhost:5000/api/home HTTP/1.1
+authorization: BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjIiLCJpYXQiOjE2MDk1NjE2ODcsImV4cCI6MTYwOTU2MjI4N30.qVxNbQhXujmUKVWv-E78zuRYZI2aMkGUdrqbG9Pk-QM
+content-type: application/json
+
+{
+    "id": 2
 }

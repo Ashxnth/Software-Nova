@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../App.css';
-import { Card, Input, Spacer, Button } from '@zeit-ui/react';
 import axios from 'axios';
+import { CompanyContext } from '../context/CompanyContext';
+import {useHistory} from 'react-router-dom';
+import { Card, Input, Spacer, Button } from '@zeit-ui/react';
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const {setUserId} = useContext(CompanyContext);
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -15,11 +18,17 @@ function Signup() {
     setPassword(e.target.value);
   }
 
+  let history = useHistory();
+
   const signup = (e) => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/signup', {
       username: username,
       password: password
+    })
+    .then((res) => {
+      setUserId(res.data.userId);
+      history.push('/login');
     })
     .catch((error) => {
     console.log(error);

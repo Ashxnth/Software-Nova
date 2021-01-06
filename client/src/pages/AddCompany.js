@@ -1,23 +1,21 @@
-import React, {useState, useContext} from 'react';
-import { useHistory } from "react-router-dom";
-import {CompanyContext} from '../context/CompanyContext';
 import '../App.css';
-import { Card, Input, Spacer, Button } from '@zeit-ui/react';
 import axios from 'axios';
+import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
+import { Card, Input, Spacer, Button, Text, Select } from '@zeit-ui/react';
 
 function AddCompany() {
   const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
+  const [status, setStatus] = useState('No Status');
   const [imageUrl, setimageUrl] = useState('');
   const [careersUrl, setcareersUrl] = useState('');
-  const {token} = useContext(CompanyContext);
 
   const updateName = (e) => {
     setName(e.target.value);
   }
 
-  const updateLocation = (e) => {
-    setLocation(e.target.value);
+  const updateStatus = (value) => {
+    setStatus(value);
   }
 
   const updateimageUrl = (e) => {
@@ -32,16 +30,19 @@ function AddCompany() {
 
   const addCompany = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/home', {
+    axios.post('http://localhost:5000/api/home/add', {
       name: name,
-      location: location,
+      userId: localStorage.getItem('userId'),
+      status: status,
       image_url: imageUrl,
       careers_url: careersUrl
-    }, { headers: {authorization: `Bearer ${token}`} })
+    }, {headers: {authorization: `Bearer ${localStorage.getItem('jwt')}`}})
+    .then(() => {
+      history.push('/home');
+    })
     .catch((error) => {
     console.log(error);
     });
-    history.push('/home');
   }
 
   return (
@@ -54,9 +55,16 @@ function AddCompany() {
             Company Name
           </Input>
           <Spacer />
-          <Input onChange={updateLocation} placeholder="Mountain View, CA" width="95%">
-            Location
-          </Input>
+          <Text>Application Status</Text>
+          <Spacer y={0.5}/>
+          <Select placeholder="Choose One" onChange={updateStatus}>
+            <Select.Option value="No Status">No Status</Select.Option>
+            <Select.Option value="Applied">Applied</Select.Option>
+            <Select.Option value="Online-Assessment">Online-Assessment</Select.Option>
+            <Select.Option value="Phone-Screen">Phone-Screen</Select.Option>
+            <Select.Option value="On-Site">On-Site</Select.Option>
+            <Select.Option value="Offer!">Offer!</Select.Option>
+          </Select>
           <Spacer />
           <Input onChange={updateimageUrl} placeholder="Link" width="95%">
             Image URL

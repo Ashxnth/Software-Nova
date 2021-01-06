@@ -6,10 +6,9 @@ export const CompanyProvider = (props) => {
     //Initial State
     const [company, setCompany] = useState([]);
     const [editUser, setEditUser] = useState({});
-    const [token, setToken] = useState('');
 
     return(
-        <CompanyContext.Provider value={{company, setCompany, editUser, setEditUser, token, setToken}}>
+        <CompanyContext.Provider value={{company, setCompany, editUser, setEditUser}}>
             {props.children}
         </CompanyContext.Provider>
     );

@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getCompany, addCompany, editCompany, deleteCompany, addUser, authenticateUser, authenticateToken } = require('../controllers/controllers');
+const { authenticateToken } = require('../middleware/authMiddleware');
+const { getCompany, addCompany, editCompany, deleteCompany, addUser, authenticateUser } = require('../controllers/controllers');
 
 router
     .route('/home')
-    .get(authenticateToken, getCompany)
+    .post(authenticateToken, getCompany)
+
+router
+    .route('/home/add')
     .post(authenticateToken, addCompany)
 
 router
@@ -19,7 +23,5 @@ router
 router
     .route('/login')
     .post(authenticateUser)
-
-
 
 module.exports = router;

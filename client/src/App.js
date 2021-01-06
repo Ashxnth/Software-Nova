@@ -1,37 +1,30 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import './App.css';
+import {CompanyProvider} from './context/CompanyContext';
+import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
 import AddCompany from './pages/AddCompany';
 import EditCompany from './pages/EditCompany';
-import {CompanyProvider} from './context/CompanyContext';
-import './App.css';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <CompanyProvider>
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/home">
-            <Navbar />
-            <Home />
-          </Route>
-          <Route path="/add-company">
-            <Navbar />
-            <AddCompany />
-          </Route>
-          <Route path="/edit-company">
-            <Navbar />
-            <EditCompany />
-          </Route>
+          <PrivateRoute path="/home" component={Home} />
+          <PrivateRoute path="/add-company" component={AddCompany} />
+          <PrivateRoute path="/edit-company" component={EditCompany} />
         </Switch>
       </Router>
       </CompanyProvider>

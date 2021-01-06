@@ -1,23 +1,45 @@
-import React, {useContext} from 'react';
-import { CompanyContext } from '../context/CompanyContext';
-import { Link } from 'react-router-dom';
 import '../App.css';
+import { useHistory } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
-    const {setToken} = useContext(CompanyContext);
+    const token = localStorage.getItem('jwt');
+
+    let history = useHistory();
     function logout() {
-        setToken('');
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('userId');
+        history.push('/login');
     }
+
+    let navbar;
+    if (token) {
+        navbar = (
+            <div className="Navbar">
+                <ul>
+                    <li><a>🚀Software Nova☄️</a></li>
+                    <li><Link to='/home'>Home</Link></li>
+                    <li><Link to='/add-company'>Add-Company</Link></li>
+                    <li onClick={logout}><Link to='/login'>Logout</Link></li>
+                </ul>
+            </div>
+        );
+    } else {
+        navbar = (
+            <div className="Navbar">
+                <ul>
+                    <li><a>🚀Software Nova☄️</a></li>
+                    <li><Link to='/login'>Login</Link></li>
+                    <li><Link to='/signup'>Signup</Link></li>
+                </ul>
+            </div>
+        );
+    }
+
     return (
-        <div className="Navbar">
-            <ul>
-                <li><a>🚀Software Nova☄️</a></li>
-                <li><Link to='/home'>Home</Link></li>
-                <li><Link to='/add-company'>Add-Company</Link></li>
-                <li onClick={logout}><Link to='/login'>Logout</Link></li>
-            </ul>
-        </div>
-    );
+        <div>{navbar}</div>
+    ); 
 }
 
 export default Navbar;

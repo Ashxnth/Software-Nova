@@ -1,20 +1,22 @@
-import React, {useContext, useEffect} from 'react';
+import '../App.css';
+import axios from 'axios';
 import CompanyCard from '../components/CompanyCard';
 import { CompanyContext } from '../context/CompanyContext';
-import axios from 'axios';
-import '../App.css';
+import React, {useContext, useEffect} from 'react';
 
 function Home() {
-    const {company, setCompany, token} = useContext(CompanyContext);
+    const {company, setCompany} = useContext(CompanyContext);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/home', { headers: {authorization: `Bearer ${token}`} })
+        axios.post('http://localhost:5000/api/home', {
+            userId: localStorage.getItem('userId'),
+        }, {headers: {authorization: `Bearer ${localStorage.getItem('jwt')}`}})
         .then((res) => (setCompany(res.data)))
     },[]);
 
     return (
         <div className="Home">
-            {company.map(company => <CompanyCard name={company.name} location={company.location} image_url={company.image_url} careers_url={company.careers_url} id={company.id} />)}
+            {company.map(company => <CompanyCard name={company.name} status={company.status} image_url={company.image_url} careers_url={company.careers_url} id={company.id} />)}
         </div>
     );
 }

@@ -1,14 +1,13 @@
-import React, {useState, useContext} from 'react';
-import {CompanyContext} from '../context/CompanyContext';
-import {useHistory, Link} from 'react-router-dom';
-import '../App.css';
-import { Card, Input, Spacer, Button } from '@zeit-ui/react';
 import axios from 'axios';
+import '../App.css';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import { Card, Input, Spacer, Button } from '@zeit-ui/react';
+//axios.defaults.withCredentials = true;
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const {token, setToken} = useContext(CompanyContext);
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -26,13 +25,14 @@ function Login() {
       username: username,
       password: password
     })
-    .then(res => setToken(res.data.accessToken))
+    .then((res) => {
+      localStorage.setItem('jwt', res.data.accessToken);
+      localStorage.setItem('userId', res.data.userId);
+      history.push('/home');
+    })
     .catch((error) => {
     console.log(error);
     });
-    if(token) {
-      history.push('/home')
-    }
   }
 
   return (
@@ -49,9 +49,7 @@ function Login() {
             Password
           </Input>
           <Spacer />
-          <Button onClick={login} shadow type="secondary">Login</Button>
-          <Spacer />
-          <Link to='/signup'>Signup</Link>
+          <Button onClick={login} shadow type="secondary">Login</Button>  
         </Card>
       </div>
     </div>
